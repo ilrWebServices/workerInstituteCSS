@@ -1,0 +1,186 @@
+@import "_mixins-vars";
+
+/*=BASE
+------------------------------------------------*/
+html {
+	-webkit-font-smoothing: antialiased;
+}			
+
+
+body { 
+  color: $darkGray2;
+  font-family: $bodyFont;
+  font-size: $font-base-percentage;
+  line-height: em($font-base-line-height);
+  font-weight: 100;
+}
+
+/*=HEADINGS
+------------------------------------------------*/
+
+/* should set this up by header, main, footer */
+
+h2			  	  { @include heading(24px); }
+h3 				  { @include heading(21px); }
+h4 				  { @include heading(15px); }
+h5 				  { @include heading(15px); }
+h6 				  { @include heading(15px); }
+
+@media screen and (max-width: $smallScreen) {
+	h1				  { @include heading(24px); }
+	h2			  	  { @include heading(18px); }
+	h3 				  { @include heading(21px); }
+	h4 				  { @include heading(15px); }
+	h5 				  { @include heading(15px); }
+	h6 				  { @include heading(15px); }
+}
+
+
+h1,h2,h3,h4,h5,h6 {
+	color: $midGray;
+	text-transform: uppercase;
+	font-family: $header;
+}
+
+h4,h5,h6 { 
+	margin-bottom: 0; 
+}
+
+h1:first-child,h2:first-child,h3:first-child,h4:first-child{ margin-top: 0; }
+
+h1 img, h2 img, h3 img, h4 img, h5 img, h6 img{margin: 0;}
+
+/*=Specific heading styles
+------------------------------------------------*/
+//h1.pageTitle
+.pageTitle{
+	font-family: $header2;
+	color: $darkGray;
+	@include heading(30px);
+	padding-top: .5em;
+	line-height: 1em;
+	@media screen and (min-width: $smallScreen + 1){
+		padding-top: 0px;
+	}
+}
+
+p + h2, p + h3, p + h4, p + h5,
+aside + h2, aside + h3, aside + h4, aside + h5,
+ul + h2, ul + h3, ul + h4, ul + h5 {
+	margin-top: 1em;
+}
+
+#siteTitle h2 {
+	line-height: .25;
+}
+
+header a {
+  border-bottom: none;
+}
+
+section>a>h1{
+	@include heading(18px);
+}
+
+.thumbnailList.features> article > a > h1{
+	@include heading(18px);
+	color: $midGray;
+	text-transform: uppercase;
+	font-family: $header;
+	text-decoration: none;
+	position: relative;
+}
+
+
+article>a>h1{
+	color: $red;
+	text-transform: none;
+	font-family: $bodyFont;
+	text-decoration: underline;
+	display: inline-block;
+	margin-bottom: .5em;
+	@media screen and (max-width: $smallScreen){
+		font-size: 1.5em;
+		line-height: 1em;
+	}
+}
+
+.features a h1, .thumbnailList > a > h1{
+	//@include trailingLinkArrow();
+}
+
+
+#main aside h1{
+	color: $lightMidGray2;
+	background: $darkGray2;
+	font-size: 1em;
+	display: inline-block;
+	padding: .5em 1em;
+	margin-bottom: lh()/2;
+	z-index: 100;
+	@media screen and (min-width: $smallScreen + 1){
+		margin-left: -$gutter-width - 8px;
+		font-size: 1.5em;
+	}
+}
+div.orbit-slide > span h1{
+	font-family: $header2;
+	color: $darkGray;
+	@include heading(32px);
+	line-height: 1.2em;
+}
+
+/*=TEXT ELEMENTS
+------------------------------------------------*/
+
+p { margin: 0 0 lh(.5); }
+	
+img { max-width: 100%; 
+}
+	
+img[align=left]   { float: left; margin: 0 lh() lh() 0; }	
+img[align=right]  { float: right; margin: 0 0 lh() lh(); }
+img[align=middle] { display: block; margin: 0 auto lh(); }
+
+a {
+	color: $red;
+	text-decoration: none;
+	border-bottom: 1px dotted $red;
+	&:hover, &:focus { 
+		color: $red;
+		border-bottom: 1px solid $red; }
+	&:hover, &:active { outline:  none;	}
+	h2{
+		color: $darkGray2;
+		border-bottom: 1px dotted $red;
+		&:hover, &:focus { 
+		  border-bottom: 1px solid $red; 
+		}
+	}
+}
+
+strong      { font-weight: bold; }
+em,dfn      { font-style: italic; }
+dfn         { font-weight: bold; }
+sup, sub    { line-height: 0; }
+sup			{ color: $midGray; vertical-align: super; }
+
+abbr, 
+acronym     { border-bottom: 1px dotted $midGray; }
+
+pre,
+code { 
+	font-family: "Courier New", monotype, serif;
+	font-size: em(12px);
+	line-height: em(12px, 12px);
+}
+
+
+/*=LISTS
+------------------------------------------------*/
+li ul, 
+li ol       { margin: 0 lh(); }
+ul, ol      { margin: 0; }
+
+ul          { list-style-type: none; }
+ol          { list-style-type: decimal; }

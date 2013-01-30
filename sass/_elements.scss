@@ -1,0 +1,704 @@
+@import "_mixins-vars";
+
+/*===
+SPRITES probably will move, just here for dev
+===*/
+@import "sprites/*.png";
+@include all-sprites-sprites;
+
+body{
+	background: url(../stylesheets/layout-images/body-background.png);
+	@media screen and (max-width: $smallScreen) {
+		background: $darkGray2;
+	}   
+}
+
+#skipToContent{
+	position:absolute;
+	width: 100%;
+	background: $darkGray2;
+	height: 120px;
+	text-indent: -10000px;
+	
+	@media screen and (min-width: $smallScreen +1){
+		height: 170px;
+	}
+	@media screen and (min-width: $mediumScreen + 1){
+		height: 215px;
+	}
+}
+
+.ie8{
+  #skipToContent{
+    height: 240px;
+  }
+}
+ 
+
+header{
+	@include pie-clearfix();
+	@media screen and (max-width: $smallScreen) {
+		.headerImage{
+			display: none;
+		}		
+	}
+}
+
+/*site title header group */
+#siteTitle{
+	clear:both;
+	margin-top:em(25px);
+	margin-bottom: 75px;
+	padding-left: 85px;
+		h1 {
+		@include heading(46px);
+		font-family: $header;
+		color: $white;
+		font-weight: 400;
+		letter-spacing: em(-.5px);
+		margin-bottom: 7px;
+		margin-top: 0;
+			span{
+				color: $red;
+			}
+		}
+		h2{
+		@include smallGrayCaps();
+		}
+		@media screen and (max-width: $mediumScreen){
+			padding-left: $column-padding;
+			margin-bottom: em(62px);
+			h1{
+			font-size: em(32px);
+			}
+		}
+		@media screen and (max-width: $smallScreen) {
+			margin-bottom: 0;
+			padding-left: 0;
+			h1{
+				line-height: 1em;
+				font-size: em(32px);
+			}
+			h2{
+				font-size: em(8px);
+			}
+		}
+}
+
+#search{
+	text-align: right;
+	color: $white;
+	font-size: em(12px);
+	padding-top: 20px;
+	a{
+		color: $white;
+		border-bottom: 1px solid $white;
+	}
+	#searchLink{
+		position: absolute;
+		left: -10000px;
+	}
+	@media screen and (max-width: $mediumScreen){
+		padding-right: $column-padding;
+	}
+	@media screen and (max-width: $smallScreen) {
+		form{
+		    display: none;
+	    }
+    	#searchLink{
+	    	position: absolute;
+	    	right: 1em;
+	    	top: .5em;
+	    	color: $white;
+	    	border-bottom: none;
+    	}
+  }
+}
+
+#skipToMainNav {
+	position: absolute;
+	top: -60px;
+	@media screen and (max-width: $smallScreen) {
+		right: .5em;
+	    top: 60px;
+	    //display:block;
+	    padding: .25em .75em;
+	    border-bottom: none;
+	    background: $lightMidGray2;
+	    color: $darkGray;
+	    text-transform: uppercase;
+	    font-family: $header;
+	    border: 1px solid $lightMidGray2;
+	    @include border-radius(5px);
+    }
+}
+
+#socialMediaLinks{
+	@include smallGrayCaps();
+	//float: right;
+	padding-top: 5px;
+	li{
+		float: left;
+	}
+	a{
+		display: block;
+		height: 26px;
+		width: 26px;
+		//background: $midGray;
+		text-indent: -10000px;
+		border-bottom: none;
+		margin-right: em(8px);
+	}
+	@media screen and (max-width: $smallScreen) {
+		display: none;
+    }
+}
+
+header > #socialMediaLinks{
+	float:right;
+}
+
+#mainNavigation{
+	position: absolute;
+	top: em(185px);
+	font-family: $header;
+	text-transform: uppercase;
+	width: 100%;
+	z-index: 10;
+	ul{
+		width: 100%;
+		float: left;
+	}
+	li{
+		float: left;
+		text-align: center;
+		/*assign % widths to full size menu li's*/
+		&.home{
+			width: perc(90px);
+			a{
+				border-left:none;
+			}
+	  	}	
+	  	&.about, &.training{
+		  width: perc(175px);
+		}
+		&.news{
+		  width: perc(140px);
+		}
+		&.resources, &.consulting{
+		  width: perc(130px);
+		}
+		&.research{
+		  width: perc(120px);
+		}
+		/*adjust widths for tablet */
+		@media screen and (max-width: $mediumScreen){
+			&.home{
+				width: perc(80px);
+			}
+			&.research{
+				width: perc(110px);
+			}
+			&.training{
+				width: perc(195px);
+			}
+		}
+		/* adjust widths for small screen */
+		@media screen and (max-width: $smallScreen){
+			&.home, &.about, &.training,&.news, &.resources, &.consulting, &.research{
+				width: 100% !important;
+			}
+			float: none;
+		}
+	}
+	a{
+		color:$lightMidGray;
+		background: $darkGray;
+		display: block;
+		border-bottom: none;
+		padding: em(18px) 0;
+		border-right: em(1px) solid $black;
+		border-left: em(1px) solid $midGray;
+		@include transition(all 0.15s linear);
+			&:hover{
+				background: $black;
+				color: $white;
+			}
+		}
+	/* tablet for <nav>*/
+	@media screen and (max-width: $mediumScreen){
+		top: em(189px);
+		font-size: .9em;
+		a{
+			color: $white;
+		}
+	}
+	/* small screen for <nav>*/
+	@media screen and (max-width: $smallScreen) {
+	    position:relative;
+	    display: block;
+	    top: 0px;
+	    font-size: 1em;
+	    z-index: 1000;
+	    a{
+	    	border-bottom: em(1px) solid $black;
+			border-top: em(1px) solid $midGray;
+			border-left: none;
+			border-right: none;
+	    	//display: block;
+		    padding: 1em 0;
+		    width: 100%;
+	    }
+	}
+}
+
+#subsiteName{
+	position: absolute;
+	font-family: $header2;
+	font-size: em(46px);
+	color: $white;
+	padding: .5em $gutter-width .4em;
+	background: $red;
+	top: 300px;
+	left: -8px;
+	@media screen and (max-width: $smallScreen){
+		left: -1000px;
+	}
+	@media screen and (max-width: $mediumScreen){
+		font-size: em(32px);
+		top: 270px;
+	}
+}
+
+#breadcrumbNavigation{
+	background: $lightGray;
+	font-size: .75em;
+	padding: $column-padding $gutter-width;
+	margin-top: -10px;
+	@media screen and (max-width: $smallScreen) {
+			display: none;
+	}
+}
+
+#main{
+	background: $lightGray;
+	overflow: visible;
+	@include pie-clearfix();
+	position: relative;
+	li{background: url(../stylesheets/layout-images/white-bullet.png) no-repeat 0px 8px;
+		padding-left: 15px;
+		margin-bottom: lh(.25em);
+	}
+}
+
+footer{
+	background: $midGray;
+	color: $white;
+	position: relative;
+	padding-bottom: 30px;
+	@include pie-clearfix();
+	//font-size: .75em;
+	h1, h2, h3{
+		color: $white;
+	}
+	a{
+		color: $lightGray; 
+		border-bottom: 1px solid $white;
+		//padding-left: $gutter-width;
+	}
+	.links li{
+		position: relative;
+		padding-left: $gutter-width + $column-padding;
+		margin-bottom: $column-padding;
+		@include grayLeadingLinkArrow();
+	}
+	#socialMediaLinks{
+		position: absolute;
+		bottom: 5px;
+		left: 50px;
+	}
+}
+
+#footerNavigation{
+	padding-bottom: 2em;
+	a{
+		color: $white;
+		border-bottom: 1px solid $white;
+	}
+	li{
+		float: left;
+		margin-right: .5em;
+	}
+}
+
+.toTop, .ilrLogo{
+	display: block;
+	text-indent: -10000px;
+	border-bottom: none;	
+	display: block;
+	}
+	.toTop{
+		height: 38px;
+		width: 38px;		
+		background: url(../stylesheets/layout-images/up.png) no-repeat;
+		position: absolute;
+		bottom: 0px;
+	}
+	.ilrLogo{
+		background: url(../stylesheets/layout-images/ilr-footer-logo.jpg) no-repeat;
+		width: 148px;
+		height: 54px;
+		position: absolute;
+		bottom: 0px;
+		right: 0px;
+	}
+	
+/*===
+sidebar===*/
+
+.sidebar{
+	position: relative;
+	top: -49px;
+	@media screen and (max-width: $smallScreen){
+		position: static;
+		top: 0px;
+	}
+}
+.nonav {
+  top: -10px !important;
+  padding-top: 25px;
+  background: $lightGray;
+}
+.sectionNavHeading{
+	background: rgba($lightGray, .8);
+	padding: $column-padding $gutter-width $column-padding ($gutter-width*2+$column-padding);
+	
+	color: $darkGray;
+	margin-bottom: 0;
+	@media screen and (min-width: $smallScreen + 1){
+		@include leadingLinkArrow();
+	}
+}
+.lt-ie9 {
+  .sectionNavHeading{
+		background: none repeat scroll 0 0 rgb(232, 232, 232);
+    color: #2C2C2C;
+    margin-bottom: 0;
+    padding: 10px 20px 10px 50px;
+	}
+}
+
+#secondaryNavigation{
+	li{
+		background: none;
+		padding: 0;
+		margin-bottom: 0;
+	}
+	a{
+		display: block;
+		background: $white;
+		padding: $column-padding $gutter-width;
+		border-bottom: 1px solid $lightMidGray;
+	}
+}
+
+
+/*===
+FORMs
+===*/
+
+/*input[type="text"], input[type="submit"], input[type="password"], input[type="date"], input[type="datetime"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], textarea { 
+  border: 1px solid $darkGray; 
+  @include border-radius(2px); 
+  @include box-shadow(inset 0 1px 2px rgba(0,0,0,0.1)); 
+  color: $darkGray; 
+  margin: 0; padding: 0px; @include transition(all 0.15s linear); background: $lightGray;font-size: em($font-base);padding: em(5px);
+
+//&.oversize { @include font-size(18, true); }
+
+&:focus { background: darken($white, 2%); outline: none !important; border-color: darken($white, 30%); }
+&[disabled] { background-color: #ddd; }
+}*/
+
+.button{
+	@include button($lightGray);
+}
+/*=== 
+page elements
+===*/
+
+blockquote{
+	background: $white;
+	padding: $column-padding;
+	quotemark{
+		display:block;
+		width: 44px;
+		height: 34px;
+		background: url(../stylesheets/layout-images/quote.jpg) no-repeat;
+		float: left;
+		text-indent: -10000px;
+		padding: 0 $column-padding $column-padding 0;
+	}
+}
+
+.callout{
+	background: $lightGray;
+	@include border-radius(5px);
+	padding: $column-padding;
+	p{
+	font-style: italic;
+	}
+}
+
+* .separate{
+	background: $lightMidGray2;
+	padding: $column-padding;
+	@include border-radius(3px);
+}
+* .gray{
+	background: $lightMidGray2;
+}
+.divider{	
+	background: url(../stylesheets/layout-images/hr-bg.gif) repeat-x 0% 50%; 
+	padding: 0 $gutter-width;
+	height: 3em; 
+	border: none; 
+	display: block;
+	clear: both;
+}
+
+/*===
+tabs
+===*/
+
+ #tabs{
+ padding: $gutter-width 0;
+ float: left;
+ }
+ .column6 #tabs{
+	 width: 100%;
+ }
+ .sidebar #tabs{
+   	padding-left: $gutter-width;	 
+   	
+ }
+ #tabNavigation{
+    float: left;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    border-bottom: 1px solid $white;
+    li{
+     	float: left; 
+     	background: none;
+     	padding-right: 5px;
+     	padding-left: 0px;
+     	margin-bottom: 0px;
+     	&.ui-tabs-selected a{
+	     	@include background-image(linear-gradient($white, $lightMidGray2));
+     	}
+   	}
+   	a{
+   		display:block;
+   		padding:$column-padding $gutter-width*2 $column-padding $gutter-width;
+   		margin-bottom: 0;
+   		@include border-top-left-radius(10px);
+   		@include border-top-right-radius(10px);
+   		border-bottom: none;
+   		@include background-image(linear-gradient($lightGray2, $lightMidGray));
+		font-size: em(18px);
+		color: $midGray;
+		text-transform: uppercase;
+		font-family: $header;
+		text-decoration: none;
+		position: relative;
+		@include trailingLinkArrow();
+	}
+   a:hover, .ui-tabs-selected a{
+		
+	}
+}
+.ui-tabs .ui-tabs-hide { display: none !important; }
+
+/*===
+Spotlight and thumbnail Containers and elements
+===*/
+
+//heading typography done in _typography.scss
+
+.thumbnailList{
+	article{
+	@include pie-clearfix();
+	margin-bottom: 1em;
+		a{
+			color: $darkGray;
+			border-bottom: none;
+			float: right;	
+		}		
+		a.image {
+		  float: left !important;
+			display: block;
+		}
+	}
+	img{
+		border: 6px solid $lightMidGray;
+		float: left;
+	}
+	.date{
+		font-size: .75em;
+		margin-bottom: 0px;
+	}
+	@media screen and (max-width: $smallScreen){
+		img{
+			display: none;
+		}
+	}
+}
+
+
+.column8 > .thumbnailList > article {
+	img{
+		max-width: perc(83px, 600px);
+	}
+	.date{
+		margin-left: perc($gutter-width, 600px);
+	}
+	a{
+		width: perc(484px, 600px);
+	}
+}
+.column6  .thumbnailList  article{
+	img{
+		max-width: perc(83px, 439px);
+	}
+	img.feature{
+		max-width: perc(439px, 439px);
+		margin-bottom: 1em;
+	}
+	.date{
+		margin-left: perc($gutter-width, 439px);
+	}
+	a{
+		width: perc(326px, 439px);
+	}
+
+	a.image, a.feature {
+	  float: none;
+		display: block;
+		}
+	a.image {
+	  max-width: perc(83px, 439px);
+	}
+	a.image img {
+		max-width: 100%;
+	}
+	a.feature {
+		clear: both;
+		width: 100%;
+	}
+}
+.column4 > .thumbnailList > article{
+	img{
+		max-width: perc(83px, 279px);
+	}
+	.date{
+		margin-left: perc($gutter-width, 279px);
+	}
+	a{
+		width: perc(166px, 279px);
+	}
+}
+
+@media screen and (max-width: $smallScreen){
+	.column4 > .thumbnailList > article > a, .column6 > .thumbnailList > article > a, .column8 > .thumbnailList > article >a{
+		width: 100%;
+		float: none;
+	}
+}
+
+/*===
+vevent
+===*/
+.vcalendar{
+	padding-top: 1.5em;
+	float: left;
+	.dtstart{
+		font-size: .9em;
+		color: $red;
+	}
+	h1{
+		display: inline-block;
+		text-transform: none;
+		font-family: $bodyFont;
+		font-weight: bold;
+		font-size: 1em;
+	}
+	.summary > span{
+		display: block;
+		float: left;
+	}
+}
+.dateCircle{
+		display: block;
+		width: 15%;
+		float: left;
+		font-family: $header;
+		color: $white;
+		font-size: em(18px);
+		background: $lightMidGray;
+		width: 35px;
+		height: 35px;
+		padding: 15px 0 0 15px;
+		@include border-radius(25px);
+}
+.vevent{
+	margin-bottom: 1em;
+	float: left;
+}
+
+.vevent > a{
+	display: block;
+	float: right;
+	color: 	$darkGray2;
+	border-bottom: none;
+	}
+	
+.column6 .vevent > a{
+	width: 100%;
+	@media screen and (min-width: $smallScreen +1){
+		width: 80%;
+	}
+	@media screen and (min-width: $mediumScreen +1){
+		width: 85%;
+	}
+}
+
+.sidebar .vevent > a{
+	width: 100%;
+	@media screen and (min-width: $smallScreen + 1){
+		width: 70%;
+	}
+	@media screen and (min-width: $mediumScreen +1){
+		width: 75%;
+	}	
+}
+
+@media screen and (max-width: $smallScreen){
+	.dateCircle{
+		display: none;
+	}
+	.column6 .vevent > a, .sidebar .vevent > a{
+		width: 100%;
+	}
+}
+
+/*===
+hcard
+===*/
+
+article.vcard{
+  h1 {text-transform: none;}
+  a {border-bottom: none;}
+  .title {font-weight: bold;}
+  a.email > span {font-size: 85%;}
+}

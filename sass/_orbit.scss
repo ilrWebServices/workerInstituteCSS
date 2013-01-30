@@ -1,0 +1,255 @@
+/* CSS for jQuery Orbit Plugin 1.4.0
+ * Maintained for Foundation. foundation.zurb.com
+ * Free to use under the MIT license.
+ * http://www.opensource.org/licenses/mit-license.php
+*/
+
+/*===
+SPRITES probably will move, just here for dev
+===*/
+@import "arrow-sprites/*.png";
+@include all-arrow-sprites-sprites;
+
+#featuredContent{
+	margin-bottom: 20px;
+}
+  /* Container ---------------------- */
+
+  div.orbit-wrapper {
+    width: 1px;
+    height: 1px;
+    position: relative; }
+
+  div.orbit {
+    width: 1px;
+    height: 1px;
+    position: relative;
+    overflow: hidden;
+    //margin-bottom: 1em; 
+    	img{
+	margin-bottom: -6px;
+	}
+	border-bottom: 5px solid $lightMidGray;
+    }
+
+  //div.orbit.with-bullets {
+     // margin-bottom: 40px; }
+
+  div.orbit .orbit-slide {
+    max-width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0; 
+    z-index: 3;
+    background: $white;
+    }
+
+  div.orbit a.orbit-slide {
+    border: none;
+    line-height: 0;
+    display: none; }
+
+  div.orbit div.orbit-slide {
+    width: 100%;
+    height: 100%; 
+    }
+    
+  /*=== WI specific
+  ===*/
+  div.orbit-slide > span{
+	  position: absolute;
+	  z-index: 10;
+	  background: rgba($white, .7);
+	  @include border-radius(3px);
+  }
+
+@media screen and (min-width: $mediumScreen + 1px){
+	div.orbit-slide > span{
+	  top: 85px;
+	  left: 40px;
+	   padding: $gutter-width + $column-padding;
+	  width: perc(6*($column-padding + $column-width) - (2*$column-padding));
+	}
+}  
+
+ @media screen and (max-width: $mediumScreen){
+	 div.orbit-slide > span{
+		 display:block;
+		 bottom: 0px;
+		 left: 0px;
+		 padding: perc($gutter-width + $column-padding) perc(3*$gutter-width);
+		 width: perc($max-width - (6*$gutter-width));
+		 background: $white;
+		 //top: 0px;
+	 	 .button{
+		 position: absolute;
+		 top: $gutter-width;
+		 right: 0;
+		 margin-right: $gutter-width;
+		 }
+	 }
+	 #featuredContent{
+		 padding-bottom: 150px;
+		 //background: green;
+	 }
+ }
+ @media screen and (max-width: $smallScreen){
+	 div.orbit img{
+		 max-width: 100%;
+		 float: left;
+	 }
+	 div.orbit-slide > span{
+		 width: 95%;
+		right: 0px;
+		 padding: 0 2.5%;
+	 .button{
+		 top: 0px;
+	 }
+	 }
+ } 
+  /* Timer ---------------------- */
+
+  div.orbit-wrapper div.timer {
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    opacity: .6;
+    cursor: pointer;
+    z-index: 31;
+    @media screen and (max-width: $smallScreen){
+	    display:none;
+    }
+    }
+
+  div.orbit-wrapper span.rotator {
+    display: block;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 0;
+    left: -20px;
+    background: image-url("../stylesheets/layout-images/rotator-black.png") no-repeat;
+    z-index: 3; }
+
+  div.orbit-wrapper span.mask {
+    display: block;
+    width: 20px;
+    height: 40px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    overflow: hidden; }
+
+  div.orbit-wrapper span.rotator.move {
+    left: 0 }
+
+  div.orbit-wrapper span.mask.move {
+    width: 40px;
+    left: 0;
+    background: image-url("../stylesheets/layout-images/timer-black.png") repeat 0 0; }
+
+  div.orbit-wrapper span.pause {
+    display: block;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: image-url("../stylesheets/layout-images/pause-black.png") no-repeat 0 0;
+    z-index: 10000000;
+    opacity: 0;
+    content:'pause'; }
+
+  div.orbit-wrapper span.pause.active {
+    background: image-url("../stylesheets/layout-images/pause-black.png") no-repeat 0 -40px; }
+
+  div.orbit-wrapper div.timer:hover span.pause,
+  div.orbit-wrapper span.pause.active {
+    opacity: 1 }
+
+  div.orbit-wrapper div.slider-nav {
+    display: block }
+
+  div.orbit-wrapper div.slider-nav span {
+    width: 41px;
+    height: 38px;
+    text-indent: -9999px;
+    position: absolute;
+    z-index: 30;
+    cursor: pointer; }
+
+  .lt-ie9 {
+    div#featuredContent span {
+      display: block;
+      width: 460px;
+      height: 248px;
+      //text-indent: -9999px;
+      position: absolute;
+      top: 85px;
+      left: 40px; 
+      background-color: white;
+      z-index: 30;
+      cursor: pointer; }
+  }
+
+  div.orbit-wrapper div.slider-nav span.right {
+    @include arrow-sprites-sprite(red-right);
+    background-size: 100%;
+    }
+
+  div.orbit-wrapper div.slider-nav span.left {
+    @include arrow-sprites-sprite(red-left);
+    background-size: 100%;
+    }
+  /*full size*/
+  @media screen and (min-width: $mediumScreen +1px){
+	   div.orbit-wrapper div.slider-nav span.left, div.orbit-wrapper div.slider-nav span.right{
+		   top: 46px;
+	   }
+	   div.orbit-wrapper div.slider-nav span.left{
+		   left:40px;
+	   }
+	   div.orbit-wrapper div.slider-nav span.right{
+		   left: 78px;
+	   }
+  }
+  /*tablet size*/
+ @media screen and (max-width: $mediumScreen){
+	   div.orbit-wrapper div.slider-nav span.left, div.orbit-wrapper div.slider-nav span.right{
+		   bottom: 150px;
+	   }
+	   div.orbit-wrapper div.slider-nav span.left{
+		   left:40px;
+	   }
+	   div.orbit-wrapper div.slider-nav span.right{
+		   left: 78px;
+	   }
+ }
+
+.lt-ie9 {
+  div.orbit-wrapper div.slider-nav span.right { 
+    background: image-url("../stylesheets/layout-images/right-arrow-small.png"); 
+  }
+  div.orbit-wrapper div.slider-nav span.left { 
+    background: image-url("../stylesheets/layout-images/left-arrow-small.png"); 
+  }
+  div.orbit-slide > span { /* rgba alpha does not work in lt IE9 */
+    background: none repeat scroll 0 0 rgba(255, 255, 255, 0.7);
+    border-radius: 3px 3px 3px 3px;
+    position: absolute;
+    z-index: 10;
+    left: 40px;
+    /* padding is not working in IE properly */
+    padding: 30px;
+    top: 85px;
+    width: 41.667%;
+  }
+}
+
+  /* Correct timer in IE */
+  .lt-ie9 .timer { display: none !important; }
+  .lt-ie9 div.caption { background:transparent; filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000,endColorstr=#99000000);zoom: 1; }

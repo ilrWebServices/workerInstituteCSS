@@ -1,0 +1,226 @@
+@import "compass/css3";
+/*=VARIABLES - GRID
+------------------------------------------------*/
+$columns: 12;
+$column-width: 60px;
+$gutter-width: 20px;
+$max-width: $columns * ($column-width + $gutter-width);
+$column-padding:10px;
+$max-width-cols: $columns * ($column-width + (2*$column-padding));
+
+
+/*=VARIABLES - FONTS
+------------------------------------------------*/
+$font-base: 14px;
+$font-base-line-height: 22.5px;
+$font-base-line-height-half: $font-base-line-height / 2;
+$font-base-percentage: (($font-base / 16px) * 100) + 0%;
+
+
+/*=VARIABLES - COLOR
+------------------------------------------------*/
+$red: #b31b1b;
+$black: #000000;
+$white: #ffffff;
+$darkGray: #2c2c2c;
+$darkGray2: #4D4E53;
+$midGray: #666666;
+$lightMidGray: #C8C8C8;
+$lightMidGray2: #D7D7D7;
+$lightGray: #E8E8E8;
+$lightGray2: #EFEFED;
+
+$color-highlight: #333;
+
+$background-highlight: #FAFAFA;
+$title-border: #EEE;
+$footer-background: #333;
+
+/*= fonts
+------------------------------------------------*/
+@include font-face("Oswald", font-files("webfontkit-oswald/oswald-regular-webfont.woff", woff, "webfontkit-oswald/oswald-regular-webfont.ttf", truetype), "webfontkit-oswald/oswald-regular-webfont.eot");
+
+@include font-face("OswaldLight", font-files("webfontkit-oswald/oswald-light-webfont.woff", woff, "webfontkit-oswald/oswald-light-webfont.ttf", truetype), "webfontkit-oswald/oswald-light-webfont.eot");
+
+$bodyFont: "arial";
+$header: "Oswald" ;
+$header2: "OswaldLight";
+
+/*= break points
+------------------------------------------------*/
+$smallScreen: 481px !default;
+$mediumScreen:768px !default;
+$largeScreen: 960px !default;
+$screenXlarge: em(1441px) !default;
+
+/*= forms
+------------------------------------------------*/
+$formSpacing: 12px !default;
+
+/*=button backgrounds
+------------------------------------------------*/
+@mixin button($color){
+	@include background-image(linear-gradient(lighten($color, 8), darken($color, 2)));
+	font-size: .8em;
+	text-transform: uppercase;
+	color: $midGray;
+	text-decoration: none;
+	border: 1px solid $lightMidGray2;
+	padding: .5em 1em;
+	@include border-radius(6px);
+}
+
+@mixin gradient($topColor, $bottomColor){
+	@include background-image(linear-gradient($topColor, $bottomColor));
+}
+@mixin grayLeadingLinkArrow{
+		&:before{
+		position: absolute;
+		left: -8px;
+		top: 3px;
+		width: 1em;
+		height: 1em;
+		content: '>';
+		color: $lightGray;
+		font-family: 'letter gothic std';
+		text-align: center;
+		//font-size: .75em;
+		padding: .1em .1em .2em .2em;
+		margin-left: .5em;
+		background: $darkGray2;
+		//@include gradient($darkGray2, $darkGray);
+		@include border-radius(3px);
+		//@include box-shadow($lightMidGray 0px 1px 2px);
+	}
+}
+
+@mixin leadingLinkArrow{
+		&:before{
+		position: absolute;
+		left: $column-padding;
+		width: 1em;
+		height: 1em;
+		content: '>';
+		color: $red;
+		font-family: 'letter gothic std';
+		text-align: center;
+		font-size: .75em;
+		padding: .1em .1em .2em .2em;
+		margin-left: .5em;
+		@include gradient($white, $lightGray);
+		@include border-radius(3px);
+		@include box-shadow($lightMidGray 0px 1px 2px);
+		@include rotate();
+	}
+}
+@mixin trailingLinkArrow{
+		&:after{
+		position: absolute;
+		width: 1em;
+		height: 1em ;
+		content: '>';
+		color: $red;
+		font-family: 'letter gothic std';
+		text-align: center;
+		font-size: .75em;
+		padding: .1em .1em .3em .2em;
+		margin-left: .5em;
+		@include gradient($white, $lightGray);
+		@include border-radius(3px);
+		@include box-shadow($lightMidGray 0px 1px 2px);
+	}
+}
+
+/*=COMPASS DEFAULTS
+------------------------------------------------*/
+$corner-radius: 5px; 
+$default-rotate: 90deg;
+
+/*MIXINS
+------------------------------------------------*/
+@mixin column($n, $padding:$column-padding, $border: 0px, $container-width: $max-width) {
+	float: left;
+	margin: .5 * percentage($gutter-width / $container-width);
+	width: percentage(($n * ($column-width + $gutter-width) - $gutter-width - ($padding * 2) - ($border * 2)) / $container-width);
+	border-width: $border;
+	padding:  percentage($padding / $container-width);
+	position: relative;
+	//background: rgba($color2, .05);
+}
+
+@mixin container($n, $padding: 0px, $border: 0px, $container-width: $max-width) {
+	float: left;
+	width: percentage(($n * ($column-width + $gutter-width) - ($padding * 2) - ($border * 2)) / $container-width);
+	border-width: $border;
+	//background: $lightGray;
+}
+
+@mixin nonFlex($n, $border:0){
+	float: left;
+	width: $n * ($column-width + $gutter-width) - ($border * 2);
+	height: $n * ($column-width + $gutter-width) - ($border * 2); 
+}
+
+/*moved font-family out*/
+@mixin heading($size) {
+	font-size: em($size);
+	//line-height: heading-line-height($size); // FIX THIS
+	line-height: 1.2;
+	margin-bottom: em($font-base-line-height-half, $size);
+}
+
+@mixin flatten-list() {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+@mixin smallGrayCaps(){
+		font-size: em(12px);
+		letter-spacing: em(2px);
+		font-family: $header2;
+		color: $lightMidGray;
+		margin-bottom: 0;
+		text-transform: uppercase;
+}
+
+@mixin cancel-webkit-margin(){
+	-webkit-margin-before: 0em;
+	-webkit-margin-after: 0em;
+}
+/*FUNCTIONS
+------------------------------------------------*/
+@function em($target, $context: $font-base) {
+	@if $target == 0 { @return 0 }
+	@return $target / $context + 0em;
+}
+
+@function perc($width, $container-width: $max-width) {
+	@return percentage($width / $container-width);
+}
+
+@function lh($amount: 1, $context: $font-base) {
+	@return em($font-base-line-height * $amount, $context);
+}
+
+@function heading-line-height($size) {
+	
+	$line-height: $font-base-line-height;
+	
+	$match: false;
+	@while $match != true {
+		
+		@if $size == $line-height {
+			$match: true;
+		} @else if  $size < $line-height {
+			$match: true;
+		} @else if $size > $line-height {
+			$line-height: $line-height + $font-base-line-height;
+		} @else {
+			$match: true;
+		}
+		
+	} 
+
+	@return ($line-height / $size) + 0em;
+}
