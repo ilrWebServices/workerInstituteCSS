@@ -33,7 +33,6 @@ body{
     height: 240px;
   }
 }
- 
 
 header{
 	@include pie-clearfix();
@@ -84,6 +83,13 @@ header{
 			}
 		}
 }
+
+.lt-ie9 {
+	#siteTitle {
+	 margin-bottom: 0 !important;
+	}
+}
+
 
 #search{
 	text-align: right;
@@ -179,7 +185,7 @@ header > #socialMediaLinks{
 				border-left:none;
 			}
 	  	}	
-	  	&.about, &.training{
+	  	&.about, &.training, &.initiatives{
 		  width: perc(175px);
 		}
 		&.news{
@@ -455,6 +461,12 @@ blockquote{
 	padding: $column-padding;
 	@include border-radius(3px);
 }
+
+.container12.separate.stayinline {
+	padding: 0;
+	margin-left: 0;
+}
+
 * .gray{
 	background: $lightMidGray2;
 }
